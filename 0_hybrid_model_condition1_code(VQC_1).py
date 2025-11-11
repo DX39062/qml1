@@ -426,7 +426,7 @@ for no, file in enumerate(filelist):
     
     skf = StratifiedKFold(n_splits=5)
     skf.get_n_splits(signal_data, signal_label)
-    
+    plt.figure()
     for no_, (train_index, test_index) in enumerate(skf.split(signal_data, signal_label)):
         #print("TRAIN:", train_index, "TEST:", test_index)
         X_train, X_test = signal_data.iloc[train_index], signal_data.iloc[test_index]
