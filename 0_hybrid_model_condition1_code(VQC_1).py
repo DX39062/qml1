@@ -271,14 +271,14 @@ def file_check_fixed(signal_df):
 
 
 # #### Define figure save function
-def save_fig(loss_list, mode, cv_no):
+def save_fig(loss_list, mode, cv_no, roi_info):
     plt.plot(loss_list)
     plt.title('Hybrid NN Training Convergence')
     plt.xlabel('Training Iterations')
     plt.ylabel('Cross Entropy Loss')
     #plt.savefig('/home/yangxin202522080302/sci/Hybrid-quantum-classical-algorithm/results/'+str(mode)+'_'+str(cv_no)+'CV_'+str(ansatz)+'_.png')
-    file_name_without_extension = file.replace('.csv', '') 
-    plt.savefig('/home/yangxin202522080302/sci/Hybrid-quantum-classical-algorithm/results/'+str(mode)+'_'+str(file_name_without_extension)+'_'+str(cv_no)+'CV_'+str(ansatz)+'_.png')
+    plt.savefig(f'/home/yangxin202522080302/sci/Hybrid-quantum-classical-algorithm/results/{roi_info}_{mode}_{cv_no}CV_{ansatz}.png')
+    
 
 # #### Define evaluation function
 def evaluation(label_pred_list):
@@ -469,7 +469,7 @@ for no, file in enumerate(filelist):
         
         train_loss_df = pd.DataFrame(loss_list_train)
         train_loss_df.to_csv('/home/yangxin202522080302/sci/Hybrid-quantum-classical-algorithm/results/'+str(ROI_info)+')_'+str(no_)+'CV_'+str(ansatz)+'.csv', index=False, header=None)
-        save_fig(loss_list_train, mode='train_ROI_'+str(ROI_info)+'_'+str(no), cv_no=str(no_))
+        save_fig(loss_list_train, mode='train', cv_no=str(no_), roi_info=ROI_info)
         loss_list_train=[]
     
         train_loss, train_perf_index = test(train_loader, mode='train',model=hybrid_model, loss_func_test=loss_function)
